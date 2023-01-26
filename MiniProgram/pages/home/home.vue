@@ -6,7 +6,7 @@
 			<swiper-item v-for="(item, i) in swiperList" :key="i">
 				<navigator class="swiper-item" :url="'/subpkg/goods_detail/goods_detail?good_id=' + item.good_id">
 					<!-- 动态绑定图片的 src 属性 -->
-					<image :src="item.image_src"></image>
+					<image :src="item.image_src" ></image>
 				</navigator>
 			</swiper-item>
 		</swiper>
@@ -14,7 +14,7 @@
 		<!-- 分类导航区域 -->
 		<view class="nav-list">
 			<view class="nav-item" v-for="(item, i) in navList" :key="i">
-				<image  class="nav-img"></image>
+				<image  class="nav-img" :src="item.nav_imgsrc"></image>
 				<!-- :src="item.cat_imgsrc" -->
 				<view>
 					<text>{{item.cat_name}}</text>
@@ -35,6 +35,7 @@
 			}
 		},
 		onLoad() {
+			
 			// 2. 在小程序页面刚加载的时候，调用获取轮播图数据的方法
 			this.getSwiperList()
 			// 调用获取分类数据的方法
@@ -69,7 +70,7 @@
 
 <style lang="scss">
 	swiper {
-		height: 330rpx;
+		height: 380rpx;
 
 		.swiper-item,
 		image {
@@ -86,9 +87,11 @@
 		font-size: 30rpx;
 
 		.nav-img {
-			width: 60px;
+			width: 50px;
 			height: 50px;
-			background-color: red;
+			margin: 5px;
+			border-radius: 50%;
+			// background-color: red;
 		}
 	}
 </style>

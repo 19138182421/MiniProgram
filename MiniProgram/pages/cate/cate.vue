@@ -12,12 +12,12 @@
 			<!-- 右侧的滚动视图区域 -->
 			<scroll-view class="right-scroll-view" scroll-y :style="{height: wh + 'px'}">
 				<view class="">
-					<image style="width: 100%; height: 100px; background-color: aqua; margin-top: 10px;"></image>
+					<image style="width: 100%; height: 100px; margin-top: 10px;" :src="cateList[active].cat_imgsrc" ></image>
 				</view>
 				<view class="nav-list">
-					<view class="nav-item" v-for="(item, i) in cateLevel2" :key="i">
-						<image class="nav-img"></image>
-						<!-- :src="item.cat_imgsrc" -->
+					<view class="nav-item" v-for="(item, i) in cateLevel2" :key="i" @click="gotoGoodsList">
+						<img class="nav-img" :src="item.cat_imgsrc"></img>
+						<!-- :src="item.cat_imgsrc"   -->
 						<view>
 							<text>{{item.cat_name}}</text>
 						</view>
@@ -69,6 +69,11 @@
 				this.active = i;
 				// 为二级分类列表重新赋值
 				this.cateLevel2 = this.cateList[i].children
+			},
+			gotoGoodsList(){
+				uni.navigateTo({
+					url:"/subpkg/goods_list/goods_list?data="+ encodeURIComponent(JSON.stringify(this.cateList[this.active]))
+				})
 			}
 		}
 	}
@@ -124,7 +129,7 @@
 					.nav-img {
 						width: 60px;
 						height: 50px;
-						background-color: red;
+						// background-color: red;
 					}
 				}
 

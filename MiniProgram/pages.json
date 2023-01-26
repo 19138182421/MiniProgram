@@ -3,28 +3,28 @@
 		//tabbar界面
 			"path": "pages/home/home",
 			"style": {
-				// "navigationBarTitleText": "",
+				"navigationBarTitleText": "Nico商城主页",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/cate/cate",
 			"style": {
-				// "navigationBarTitleText": "",
+				"navigationBarTitleText": "分类",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/cart/cart",
 			"style": {
-				// "navigationBarTitleText": "",
+				"navigationBarTitleText": "购物车",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/my/my",
 			"style": {
-				// "navigationBarTitleText": "",
+				"navigationBarTitleText": "我的主页",
 				"enablePullDownRefresh": false
 			}
 
@@ -38,7 +38,7 @@
                     "path" : "goods_detail/goods_detail",
                     "style" :                                                                                    
                 {
-                    "navigationBarTitleText": "",
+                    "navigationBarTitleText": "商品详情",
                     "enablePullDownRefresh": false
                 }
                 
