@@ -43,6 +43,25 @@
                 }
                 
                 }
+                ,{
+                    "path" : "goods_list/goods_list",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false,
+					"onReachBottomDistance": 150
+                }
+                
+                }
+                ,{
+                    "path" : "navgoodslist/navgoodslist",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 	}],
 	"globalStyle": {

@@ -13,7 +13,7 @@
 
 		<!-- 分类导航区域 -->
 		<view class="nav-list">
-			<view class="nav-item" v-for="(item, i) in navList" :key="i">
+			<view class="nav-item" v-for="(item, i) in navList" :key="i" @click="gotonavgoodslist(item)">
 				<image  class="nav-img" :src="item.nav_imgsrc"></image>
 				<!-- :src="item.cat_imgsrc" -->
 				<view>
@@ -64,6 +64,11 @@
 				// console.log(res)
 				this.navList = res.message
 			},
+			gotonavgoodslist(item){
+				uni.navigateTo({
+					url:"/subpkg/navgoodslist/navgoodslist?data="+ encodeURIComponent(JSON.stringify(item))
+				})
+			}
 		},
 	}
 </script>

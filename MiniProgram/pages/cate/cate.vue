@@ -15,7 +15,7 @@
 					<image style="width: 100%; height: 100px; margin-top: 10px;" :src="cateList[active].cat_imgsrc" ></image>
 				</view>
 				<view class="nav-list">
-					<view class="nav-item" v-for="(item, i) in cateLevel2" :key="i" @click="gotoGoodsList">
+					<view class="nav-item" v-for="(item, i) in cateLevel2" :key="i" @click="gotoGoodsList(i)">
 						<img class="nav-img" :src="item.cat_imgsrc"></img>
 						<!-- :src="item.cat_imgsrc"   -->
 						<view>
@@ -57,7 +57,7 @@
 					data: res
 				} = await uni.$http.get('/getcatitems')
 				if (res.meta.status !== 200) return uni.$showMsg();
-				console.log(res)
+				// console.log(res)
 				// 为一级分类赋值
 				this.cateList = res.message;
 				// 为二级分类赋值
@@ -70,9 +70,9 @@
 				// 为二级分类列表重新赋值
 				this.cateLevel2 = this.cateList[i].children
 			},
-			gotoGoodsList(){
+			gotoGoodsList(i){
 				uni.navigateTo({
-					url:"/subpkg/goods_list/goods_list?data="+ encodeURIComponent(JSON.stringify(this.cateList[this.active]))
+					url:"/subpkg/goods_list/goods_list?data="+ encodeURIComponent(JSON.stringify(this.cateList[this.active])) +"&active="+i
 				})
 			}
 		}
