@@ -119,7 +119,7 @@
 			gotoDetail(goods) {
 				// console.log(goods)
 				uni.navigateTo({
-					url: '/subpkg/goods_detail/goods_detail?good_id=' + goods.good_id
+					url: '/subpkg/goods_detail/goods_detail?good_id=' + goods.good_id + '&cat_id=' + goods.cat_id
 				})
 			}
 		},
