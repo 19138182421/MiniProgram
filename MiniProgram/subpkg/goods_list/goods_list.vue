@@ -1,7 +1,7 @@
 <template>
-	<view>
+	<view style="position: relative;">
 		<!-- 滚动条 -->
-		<view class="container">
+		<view class="container" style="position: fixed;background-color: #ffffff;z-index: 999;">
 			<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll" show-scrollbar="true" scroll-left="80">
 				<view id="demo1" :class="['scroll-view-item_H', i === active ? 'active' : '']"
 					v-for="(item, i) in cateList " :key="i" @click="gotoCate(item,i)">{{item.cat_name}}
@@ -13,7 +13,7 @@
 			</scroll-view>
 		</view>
 		<!--商品列表  -->
-		<view class="goods-list">
+		<view class="goods-list" style="position: absolute;top: 40px;">
 			<block v-for="(goods,i) in goodsList" :key="i">
 				<view class="good-item" @click="gotoDetail(goods)">
 					<view class="goods-img">
@@ -179,15 +179,18 @@
 			width: 150px;
 			height: 250px;
 			margin: 5px;
+			border-radius: 20px;
 			background-color: #ffffff;
 
 			.goods-img {
 				width: 100%;
 				height: 200px;
+				border-radius: 20px;
 
 				.goods-pic {
 					width: 100%;
 					height: 100%;
+					border-radius: 20px 20px 0 0 ;
 				}
 			}
 

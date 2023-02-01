@@ -109,8 +109,8 @@
 		},
 		data() {
 			return {
-				show: false,
-				showSync: false,
+				show: true,
+				showSync: true,
 				searchVal: ''
 			}
 		},
@@ -235,7 +235,7 @@
 		flex-direction: row;
 		position: relative;
 		padding: 10px;
-		// background-color: #fff;
+		// background-color: lightgray;
 	}
 
 	.uni-searchbar__box {
@@ -251,6 +251,7 @@
 		align-items: center;
 		height: $uni-searchbar-height;
 		padding: 5px 8px 5px 0px;
+		background-color: lightgray;
 	}
 
 	.uni-searchbar__box-icon-search {
@@ -263,6 +264,7 @@
 		justify-content: center;
 		align-items: center;
 		color: #B3B3B3;
+		
 	}
 
 	.uni-searchbar__box-search-input {

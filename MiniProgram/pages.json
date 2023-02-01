@@ -62,12 +62,21 @@
                 }
                 
                 }
+                ,{
+                    "path" : "search/search",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "搜索列表页",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "NiCoo",
-		"navigationBarBackgroundColor": "#0055ff",
+		"navigationBarBackgroundColor": "#ff6781",
 		"backgroundColor": "#FFFFFF",
 		"app-plus": {
 			"background": "#efeff4"

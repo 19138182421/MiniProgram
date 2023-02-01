@@ -1,12 +1,17 @@
 <template>
 	<view>
+		<!-- 使用自定义的搜索组件 -->
+		<view class="search-box" >
+			<my-search @click="gotoSearch" :radius="200" :bgcolor="lightgray"></my-search>
+		</view>
 		<!-- 轮播图区域 -->
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
 			<!-- 循环渲染轮播图的 item 项 -->
 			<swiper-item v-for="(item, i) in swiperList" :key="i">
-				<navigator class="swiper-item" :url="'/subpkg/goods_detail/goods_detail?good_id=' + item.good_id + '&cat_id=' + item.cat_id">
+				<navigator class="swiper-item"
+					:url="'/subpkg/goods_detail/goods_detail?good_id=' + item.good_id + '&cat_id=' + item.cat_id">
 					<!-- 动态绑定图片的 src 属性 -->
-					<image :src="item.image_src" ></image>
+					<image :src="item.image_src"></image>
 				</navigator>
 			</swiper-item>
 		</swiper>
@@ -14,13 +19,19 @@
 		<!-- 分类导航区域 -->
 		<view class="nav-list">
 			<view class="nav-item" v-for="(item, i) in navList" :key="i" @click="gotonavgoodslist(item)">
-				<image  class="nav-img" :src="item.nav_imgsrc"></image>
+				<image class="nav-img" :src="item.nav_imgsrc"></image>
 				<!-- :src="item.cat_imgsrc" -->
 				<view>
 					<text>{{item.cat_name}}</text>
 				</view>
 			</view>
 		</view>
+		
+		
+		<view class="base" style="width: 100%; height: 500px; background-color: red;">
+			
+		</view>
+		
 	</view>
 </template>
 
@@ -35,7 +46,7 @@
 			}
 		},
 		onLoad() {
-			
+
 			// 2. 在小程序页面刚加载的时候，调用获取轮播图数据的方法
 			this.getSwiperList()
 			// 调用获取分类数据的方法
@@ -64,9 +75,14 @@
 				// console.log(res)
 				this.navList = res.message
 			},
-			gotonavgoodslist(item){
+			gotonavgoodslist(item) {
 				uni.navigateTo({
-					url:"/subpkg/navgoodslist/navgoodslist?data="+ encodeURIComponent(JSON.stringify(item))
+					url: "/subpkg/navgoodslist/navgoodslist?data=" + encodeURIComponent(JSON.stringify(item))
+				})
+			},
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpkg/search/search'
 				})
 			}
 		},
@@ -74,6 +90,16 @@
 </script>
 
 <style lang="scss">
+	.search-box {
+		background-color: #ffffff;
+		// 设置定位效果为“吸顶”
+		position: sticky;
+		// 吸顶的“位置”
+		top: 0;
+		// 提高层级，防止被轮播图覆盖
+		z-index: 999;
+	}
+
 	swiper {
 		height: 380rpx;
 

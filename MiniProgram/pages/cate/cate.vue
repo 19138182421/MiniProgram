@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<my-search @click="gotoSearch" :radius="200" :bgcolor="lightgray"></my-search>
 		<view class="scroll-view-container">
 			<!-- 左侧的滚动视图区域 -->
 			<scroll-view class="left-scroll-view" scroll-y :style="{height: wh + 'px'}">
@@ -11,8 +12,9 @@
 			</scroll-view>
 			<!-- 右侧的滚动视图区域 -->
 			<scroll-view class="right-scroll-view" scroll-y :style="{height: wh + 'px'}">
-				<view class="">
-					<image style="width: 100%; height: 100px; margin-top: 10px;" :src="cateList[active].cat_imgsrc" ></image>
+				<view class="" style="position: relative; top: -10px;">
+					<image style="width: 100%; height: 100px; margin-top: 10px;" :src="cateList[active].cat_imgsrc">
+					</image>
 				</view>
 				<view class="nav-list">
 					<view class="nav-item" v-for="(item, i) in cateLevel2" :key="i" @click="gotoGoodsList(i)">
@@ -46,7 +48,7 @@
 			// 获取当前系统的信息
 			const sysInfo = uni.getSystemInfoSync()
 			// 为 wh 窗口可用高度动态赋值
-			this.wh = sysInfo.windowHeight
+			this.wh = sysInfo.windowHeight - 50
 			// 调用获取分类列表数据的方法
 			this.getCateList()
 		},
@@ -70,9 +72,16 @@
 				// 为二级分类列表重新赋值
 				this.cateLevel2 = this.cateList[i].children
 			},
-			gotoGoodsList(i){
+			gotoGoodsList(i) {
 				uni.navigateTo({
-					url:"/subpkg/goods_list/goods_list?data="+ encodeURIComponent(JSON.stringify(this.cateList[this.active])) +"&active="+i
+					url: "/subpkg/goods_list/goods_list?data=" + encodeURIComponent(JSON.stringify(this.cateList[
+						this.active])) + "&active=" + i
+				})
+			},
+			// 跳转到分包中的搜索页面
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpkg/search/search'
 				})
 			}
 		}
@@ -125,7 +134,7 @@
 					width: 65px;
 					height: 70px;
 					margin: 0 0 8px 10px;
-					
+
 					.nav-img {
 						width: 60px;
 						height: 50px;
