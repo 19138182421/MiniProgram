@@ -1,7 +1,8 @@
 {
+	"lazyCodeLoading": "requiredComponents", 
 	"pages": [{
 		//tabbar界面
-			"path": "pages/home/home",
+			"path": "pages/home/home", 
 			"style": {
 				"navigationBarTitleText": "Nico商城主页",
 				"enablePullDownRefresh": false

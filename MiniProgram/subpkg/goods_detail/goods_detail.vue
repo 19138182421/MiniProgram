@@ -1,7 +1,7 @@
 <template>
-	<view class="goods" >
-		<view class="bar-list" v-show="scrolltop > 0" >
-			<text >商品</text>
+	<view class="goods">
+		<view class="bar-list" v-show="scrolltop > 0">
+			<text>商品</text>
 			<text>详情</text>
 			<text>推荐</text>
 		</view>
@@ -30,7 +30,7 @@
 					</view>
 				</view>
 				<!-- 运费 -->
-				<view class="yf">快递：免运费</view>
+				<view class="yf">快递：免运费 </view>
 				<view class="biezhu">
 					<image class="yes" src="../../static/tab_icons/yes.png"></image>
 					<text>假一赔十</text>
@@ -39,7 +39,7 @@
 					<image class="yes" src="../../static/tab_icons/yes.png"></image>
 					<text>不支持七天无理由</text>
 				</view>
-			</view>
+			</view> 
 			<view class="suggest" style="width:100%;height:200px;background-color: snow;">
 				<view style="font-size: 16px; color: dimgray;">
 					为你推荐
@@ -95,6 +95,7 @@
 </template>
 
 <script>
+
 	export default {
 		data() {
 			return {
@@ -110,7 +111,7 @@
 				}, {
 					icon: 'cart',
 					text: '购物车',
-					info: 3
+					info: 0
 				}],
 				// 右侧按钮组的配置对象
 				buttonGroup: [{
@@ -197,8 +198,8 @@
 				}
 			},
 			buttonClick(e) {
-				console.log(e)
-				this.clickText = e.content.text
+				// console.log(e)
+				this.clickText = e.content.text 
 			},
 			gotoDetail(goods) {
 				// console.log(goods)
@@ -225,8 +226,8 @@
 			position: fixed;
 			background-color: #ffffff;
 			z-index: 105;
-			
-			text{
+
+			text {
 				margin: 0 30px 0 40px;
 			}
 		}

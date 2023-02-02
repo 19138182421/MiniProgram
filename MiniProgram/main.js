@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 
+
 // 导入网络请求包escook
 import { $http } from '@escook/request-miniprogram'
 //挂载$http到uni全局对象上
@@ -32,12 +33,14 @@ uni.$showMsg = function (title = '数据加载失败！', duration = 1500) {
 }
 
 
+
+
 Vue.config.productionTip = false
 
 App.mpType = 'app'
 
 const app = new Vue({
-    ...App
+    ...App,
 })
 app.$mount()
 // #endif

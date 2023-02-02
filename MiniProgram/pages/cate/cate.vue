@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<my-search @click="gotoSearch" :radius="200" :bgcolor="lightgray"></my-search>
+		<my-search @click="gotoSearch" :radius="200" :bgcolor="bgcolor"></my-search>
 		<view class="scroll-view-container">
 			<!-- 左侧的滚动视图区域 -->
 			<scroll-view class="left-scroll-view" scroll-y :style="{height: wh + 'px'}">
@@ -41,7 +41,8 @@
 				// 二级分类数据列表
 				cateLevel2: [],
 				// 当前选中项的索引，默认让第一项被选中
-				active: 0
+				active: 0,
+				bgcolor:'#ffffff'
 			};
 		},
 		onLoad() {

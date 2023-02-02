@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<!-- 使用自定义的搜索组件 -->
+		<!-- 使用自定义的搜索组件 -->          
 		<view class="search-box" >
-			<my-search @click="gotoSearch" :radius="200" :bgcolor="lightgray"></my-search>
+			<my-search @click="gotoSearch" :radius="200" :bgcolor="bgcolor"></my-search>
 		</view>
 		<!-- 轮播图区域 -->
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
@@ -43,6 +43,8 @@
 				swiperList: [],
 				// 分类导航的数据列表
 				navList: [],
+				bgcolor:'#ffffff',
+				
 			}
 		},
 		onLoad() {
