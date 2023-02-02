@@ -1,14 +1,11 @@
 <template>
 	<view>
-		我的信息
+		新增/编辑收货地址
 	</view>
 </template>
 
 <script>
-	import badgeMix from '@/mixins/tabbar-badge.js'
-	
 	export default {
-		mixins:[badgeMix],
 		data() {
 			return {
 				

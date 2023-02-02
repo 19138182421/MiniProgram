@@ -1,37 +1,53 @@
 <template>
 	<view class="cart-container">
-		<view class="cart-title" style="position: sticky; top: 0;">
+		<view class="cart-bar" style="position: sticky; top: 0px;padding: 10px 0 0 0;">
 			<image src="http://localhost:8080/upload/cart/title.png" mode="widthFix"></image>
 		</view>
-		
+
+		<view class="cart-title">
+			<!-- 左侧图标 -->
+			<uni-icons type="shop" size="18"></uni-icons>
+			<!-- 右侧文本 -->
+			<text class="cart-title-text">购物车</text>
+		</view>
+
+		<!-- 循环渲染购物车内的信息 -->
 		<view class="cart-content">
 			<!-- 无数据时显示图片 -->
-			<view class="" v-if="cartList.length === 0">
+			<!-- <view class="" v-if="cartList.length === 0">
 				<image src="http://localhost:8080/upload/cart/kong.png" mode="widthFix"></image>
-				<!-- 去逛逛按   钮 -->
 				<view class=""
-					style="border:1px solid red;color: red;margin: auto;width: 50px;padding: 10px 30px;border-radius: 20px;" 
-					@click="gotoHome"
-					>
+					style="border:1px solid red;color: red;margin: auto;width: 50px;padding: 10px 30px;border-radius: 20px;"
+					@click="gotoHome">
 					<text>去逛逛 </text>
 				</view>
+			</view> -->
+
+			<view class="cart-List">
+				<!-- 商品列表区域 -->
+				<uni-swipe-action>
+					<block v-for="(goods, i) in cart" :key="i">
+						<uni-swipe-action-item :right-options="options" @click="swiperItemClickHandler(goods)">
+							<my-goods :goods="goods" @radio-change="radioChangeHandler"
+								@num-change="numberChangeHandler">
+							</my-goods>
+
+						</uni-swipe-action-item>
+					</block>
+				</uni-swipe-action>
 			</view>
-			
-			<view class="cart-List" style="width: 100%; height: 100px; background-color: aqua;" v-else>
-				
-			</view>
-			
+
 		</view>
-		
+
 		<!-- 为你推荐 -->
 		<view class="cart-suggest" style="width: 100%; height: 800px; background-color: pink; margin-top: 30px;">
-			
+			<text>为你推荐</text>
 		</view>
-		
-		
+
+
 		<!-- 结算 -->
-		<view class="cart-pay" >
-			
+		<view class="cart-pay" @click="gotoOrderPay" >
+		结算
 		</view>
 
 	</view>
@@ -39,19 +55,60 @@
 </template>
 
 <script>
+	import badgeMix from '@/mixins/tabbar-badge.js'
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
+
 	export default {
+		mixins: [badgeMix],
+		computed: {
+			...mapState('m_cart', ['cart'])
+		},
 		data() {
 			return {
-				cartList:[],
+				options:[{
+					text:'删除',
+					style:{
+						backgroundColor:'#ff59a1'
+					}
+				}]
 			};
 		},
-		methods:{
+		methods: {
 			//去逛逛
-			gotoHome(){
+			gotoHome() {
 				uni.switchTab({
 					url: '/pages/home/home'
 				})
+			},
+			//修改选中状态
+			radioChangeHandler(e) {
+				this.updateGoodsState(e)
+			},
+			...mapMutations('m_cart', ['updateGoodsState', 'updateGoodsCount','removeGoodsById']),
+			//修改商品数量
+			numberChangeHandler(e) {
+				// console.log(e)
+				this.updateGoodsCount(e)
+			},
+			//删除商品
+			swiperItemClickHandler(goods){
+				// console.log(goods)
+				this.removeGoodsById(goods.goods_id)
+			},
+			//转到订单结算界面
+			gotoOrderPay(){
+				// console.log(this.cart)
+				//此处对this.cart数组做过滤，过滤出未选中的商品
+				const goods = this.cart.filter(x => x.goods_state == true)
+				// console.log(goods)
+				uni.navigateTo({
+					url:'/pages/orderpay/orderpay?goods=' + encodeURIComponent(JSON.stringify(goods))
+				})
 			}
+
 		}
 	}
 </script>
@@ -59,16 +116,39 @@
 <style lang="scss">
 	.cart-container {
 		// position: relative;
-		
-		.cart-title {}
 
-		.cart-content {}
-		
-		.cart-suggest{}
-		
-		.cart-pay{
+		.cart-bar {
+			background-color: #ffffff;
+		}
+
+		.cart-title {
+			height: 30px;
+			display: flex;
+			align-items: center;
+			padding-left: 5px;
+			border-bottom: 1px solid #efefef;
+			background-color: #ffffff;
+
+			.cart-title-text {
+				margin-left: 10px;
+				font-size: 14px;
+			}
+		}
+
+		.cart-content {
+			margin: 5px;
+
+			.cart-List {
+				// background-color: #ffffff;
+
+			}
+		}
+
+		.cart-suggest {}
+
+		.cart-pay {
 			width: 100%;
-			height:70px;
+			height: 70px;
 			position: fixed;
 			top: 390px;
 			background-color: #ffffff;

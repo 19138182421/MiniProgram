@@ -30,7 +30,7 @@
 					</view>
 				</view>
 				<!-- 运费 -->
-				<view class="yf">快递：免运费 </view>
+				<view class="yf">快递：免运费</view>
 				<view class="biezhu">
 					<image class="yes" src="../../static/tab_icons/yes.png"></image>
 					<text>假一赔十</text>
@@ -39,7 +39,7 @@
 					<image class="yes" src="../../static/tab_icons/yes.png"></image>
 					<text>不支持七天无理由</text>
 				</view>
-			</view> 
+			</view>
 			<view class="suggest" style="width:100%;height:200px;background-color: snow;">
 				<view style="font-size: 16px; color: dimgray;">
 					为你推荐
@@ -95,8 +95,37 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations,
+		mapGetters
+	} from 'vuex'
+
 
 	export default {
+		computed: {
+			...mapState('m_cart', []),
+			...mapGetters('m_cart', ['total'])
+		},
+		watch: {
+			// total(newVal){
+			// 	const findResult = this.options.find(x => x.text === '购物车')
+
+			// 	if(findResult){
+			// 		findResult.info = newVal
+			// 	}
+			// }
+			total: {
+				handler(newVal) {
+					const findResult = this.options.find(x => x.text === '购物车')
+
+					if (findResult) {
+						findResult.info = newVal
+					}
+				},
+				immediate: true
+			}
+		},
 		data() {
 			return {
 				// 商品详情对象
@@ -142,7 +171,7 @@
 			};
 		},
 		onLoad(options) {
-			console.log(options)
+			// console.log(options)
 			//获取传入的商品id
 			const good_id = options.good_id
 			this.queryObj.cat_id = options.cat_id
@@ -152,6 +181,7 @@
 
 		},
 		methods: {
+			...mapMutations('m_cart', ['addToCart']),
 			async getGoodDetail(good_id) {
 				const {
 					data: res
@@ -183,7 +213,7 @@
 				})
 			},
 			onClick(e) {
-				console.log(e)
+				// console.log(e)
 				if (e.content.text === '首页') {
 					// 切换到购物车页面
 					uni.switchTab({
@@ -199,7 +229,22 @@
 			},
 			buttonClick(e) {
 				// console.log(e)
-				this.clickText = e.content.text 
+				// this.clickText = e.content.text
+
+				if (e.content.text === '加入购物车') {
+
+					const goods = {
+						goods_id: this.goods_info.good_id,
+						goods_name: this.goods_info.good_name,
+						goods_price: this.goods_info.good_price,
+						goods_count: 1,
+						goods_small_logo: this.goods_info.good_big_logo,
+						goods_state: true
+					}
+
+					this.addToCart(goods)
+
+				}
 			},
 			gotoDetail(goods) {
 				// console.log(goods)

@@ -18,8 +18,9 @@
 		}, {
 			"path": "pages/cart/cart",
 			"style": {
-				"navigationBarTitleText": "购物车",
-				"enablePullDownRefresh": false
+				// "navigationBarTitleText": "购物车",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 
 		}, {
@@ -31,7 +32,16 @@
 
 		}
 
-	],
+	    ,{
+            "path" : "pages/orderpay/orderpay",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单结算",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"subPackages": [{
 		// 其他子界面
 		"root": "subpkg",
@@ -68,6 +78,33 @@
                     "style" :                                                                                    
                 {
                     "navigationBarTitleText": "搜索列表页",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "address_info/address_info",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "选择地址",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "ac_address/ac_address",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "新增/编辑收货地址信息",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "my_order/my_order",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "我的订单",
                     "enablePullDownRefresh": false
                 }
                 
