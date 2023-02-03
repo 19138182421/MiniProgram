@@ -1,0 +1,217 @@
+<template>
+	<view class="my-userinfo">
+		<view class="my-userinfo-container">
+
+			<view class="top-box">
+				<!-- 个人昵称pet_name加个人id user_id -->
+				<view class="name-id">
+					<text>昵称：枫叶</text>
+					<text>ID：14183970</text>
+				</view>
+				<!-- 头像-->
+				<image src="" class="avatar"></image>
+			</view>
+
+		</view>
+
+		<!-- 面板的列表区域 -->
+		<view class="panel-list">
+			<!-- 第一个面板 -->
+			<view class="panel">
+				<!-- panel 的主体区域 -->
+				<view class="panel-body">
+					<!-- panel 的 item 项 -->
+					<view class="panel-item">
+						<text>8</text>
+						<text>收藏的店铺</text>
+					</view>
+					<view class="panel-item">
+						<text>14</text>
+						<text>收藏的商品</text>
+					</view>
+					<view class="panel-item">
+						<text>18</text>
+						<text>关注的商品</text>
+					</view>
+					<view class="panel-item">
+						<text>84</text>
+						<text>足迹</text>
+					</view>
+				</view>
+			</view>
+
+			<!-- 第二个面板 -->
+			<view class="panel" >
+				<!-- 面板的标题 -->
+				<view class="panel-title" data-index="0" @click="gotoMyOrder">
+					<text>全部订单</text>
+					<uni-icons type="arrowright" size="15"></uni-icons>
+				</view>
+				<!-- 面板的主体 -->
+				<view class="panel-body" >
+					<!-- 面板主体中的 item 项 -->
+					<view class="panel-item" data-index="1" @click="gotoMyOrder">
+						<image src="/static/my-icons/icon1.png" class="icon"></image>
+						<text>待付款</text>
+					</view>
+					<view class="panel-item" data-index="2" @click="gotoMyOrder">
+						<image src="/static/my-icons/icon2.png" class="icon"></image>
+						<text>待发货</text>
+					</view>
+					<view class="panel-item" data-index="3" @click="gotoMyOrder">
+						<image src="/static/my-icons/icon3.png" class="icon"></image>
+						<text>待收货</text>
+					</view>
+					<view class="panel-item" data-index="4" @click="gotoMyOrder">
+						<image src="/static/my-icons/icon4.png" class="icon"></image>
+						<text>已签收</text>
+					</view>
+				</view>
+			</view>
+			<!-- 第三个面板 -->
+
+			<view class="panel">
+				<view class="panel-list-item" @click="gotoAddressInfo">
+					<view class="" >
+						<uni-icons type="location" size="18" color="deeppink"></uni-icons>
+						<text style="margin-left: 5px;">收货地址</text>
+					</view>
+					<uni-icons type="arrowright" size="15"></uni-icons>
+
+				</view>
+				<view class="panel-list-item">
+					<view class="">
+						<uni-icons type="staff" size="18" color="#39b0ff"></uni-icons>
+						<text style="margin-left: 5px;">联系客服</text>
+					</view>
+					<uni-icons type="arrowright" size="15"></uni-icons>
+				</view>
+				<view class="panel-list-item">
+					<view class="">
+						<uni-icons type="minus" size="18" color="#ffd7bc"></uni-icons>
+						<text style="margin-left: 5px;">退出登录</text>
+					</view>
+					<uni-icons type="arrowright" size="15"></uni-icons>
+				</view>
+			</view>
+		</view>
+
+
+	</view>
+</template>
+
+<script>
+	export default {
+		name: "my-userinfo",
+		data() {
+			return {
+				clickItem:'',
+			};
+		},
+		methods:{
+			//转到我的订单
+			gotoMyOrder(e){
+				// console.log(e.currentTarget.dataset.index)
+				uni.navigateTo({
+					url:'/subpkg/my_order/my_order?index=' + e.currentTarget.dataset.index
+				})
+			},
+			//转到选择地址界面
+			gotoAddressInfo(){
+				uni.navigateTo({
+					url:'/subpkg/address_info/address_info'
+				})
+			}
+		}
+	}
+</script>
+
+<style lang="scss">
+	.my-userinfo {
+		.my-userinfo-container {
+			height: 100%;
+			// 为整个组件的结构添加浅灰色的背景
+			background-color: #f4f4f4;
+
+			.top-box {
+				height: 300rpx;
+				background: linear-gradient(to right, #ff2364, #ff2266);
+				padding: 0 20px;
+				display: flex;
+				// flex-direction: column;
+				align-items: center;
+				justify-content: space-between;
+				border-radius: 0 0 5px 5px;
+
+				.name-id {
+
+					text {
+						display: block;
+					}
+				}
+
+				.avatar {
+					display: block;
+					width: 60px;
+					height: 60px;
+					border-radius: 45px;
+					border: 2px solid white;
+					box-shadow: 0 1px 5px black;
+				}
+
+			}
+		}
+
+		.panel-list {
+			padding: 0 10px;
+			position: relative;
+			top: -10px;
+
+			.panel {
+				background-color: white;
+				border-radius: 3px;
+				margin-bottom: 8px;
+
+				.panel-title {
+					line-height: 45px;
+					padding-left: 10px;
+					font-size: 15px;
+					border-bottom: 1px solid #f4f4f4;
+
+					display: flex;
+					justify-content: space-between;
+				}
+
+
+				.panel-body {
+					display: flex;
+					justify-content: space-around;
+
+					.panel-item {
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: space-around;
+						font-size: 13px;
+						padding: 10px 0;
+
+						.icon {
+							width: 35px;
+							height: 35px;
+						}
+					}
+				}
+
+				.panel-list-item {
+					height: 45px;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					font-size: 15px;
+					padding: 0 10px;
+					border-bottom: 1px solid #e8e8e8;
+				}
+			}
+		}
+	}
+</style>

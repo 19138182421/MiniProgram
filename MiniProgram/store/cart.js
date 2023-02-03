@@ -47,16 +47,32 @@ export default {
 			state.cart = state.cart.filter(x => x.goods_id !== goods_id)
 			
 			this.commit('m_cart/saveToStorage')
+		},
+		//全选或者不全选
+		updateAllGoodsState(state,newState){
+			state.cart.forEach(x => x.goods_state = newState)
+			
+			this.commit('m_cart/saveToStorage')
 		}
 		
 	},
 	
 	getters:{
-		
+		//购物车的商品总数
 		total(state){
-			let c = 0
-			state.cart.forEach(x => c += x.goods_count)
-			return c
+			// let c = 0
+			// state.cart.forEach(x => c += x.goods_count)
+			// return c
+			
+			return state.cart.reduce((total,item)=>{return total += item.goods_count},0)
+		},
+		//购物车中所有被选择的商品数
+		checkedCount(state){
+			return state.cart.filter(x => x.goods_state).reduce((total,item) => total += item.goods_count,0)
+		},
+		//已勾选商品的总价
+		checkedGoodsAmount(state){
+			return state.cart.filter(x => x.goods_state).reduce((total,item) => total += item.goods_price * item.goods_count,0).toFixed(2)
 		}
 		
 	}

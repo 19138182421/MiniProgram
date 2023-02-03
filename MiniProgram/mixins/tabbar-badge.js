@@ -6,9 +6,28 @@ export default {
 	computed: {
 		...mapGetters('m_cart', ['total'])
 	},
+	watch: {
+		total(newVal) {
+			if (newVal == 0) {
+				console.log("+", newVal)
+				uni.removeTabBarBadge({
+					index: 2,
+				})
+				uni.hideTabBarRedDot({ //隐藏红点
+					index: 2
+				})
+
+			} else {
+				this.setBadge()
+			}
+		}
+	},
 	onShow() {
 		//在页面刚显示时会执行
-		this.setBadge()
+		// console.log(this.total)
+		if (this.total !== 0) {
+			this.setBadge()
+		}
 	},
 	methods: {
 		setBadge() {
