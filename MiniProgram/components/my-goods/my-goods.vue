@@ -1,14 +1,17 @@
 <template>
-	<view class="goods-item">
+	<view class="goods-item" >
 		<!-- 商品左侧图片区域 -->
 		<view class="goods-item-left">
 			<radio :checked='goods.goods_state' color="deeppink" class="item-radio" @click="radioClickHandler"></radio>
-			<image :src="goods.goods_small_logo || defaultPic" class="goods-pic"></image>
+			<image :src="goods.goods_small_logo || defaultPic" class="goods-pic" @click="gotoGoodDetail"></image>
 		</view>
 		<!-- 商品右侧信息区域 -->
-		<view class="goods-item-right">
+		<view class="goods-item-right" >
 			<!-- 商品标题 -->
-			<view class="goods-name">{{goods.goods_name}}</view>
+			<view class="goods-name" @click="gotoGoodDetail">{{goods.goods_name}}
+				<view class="goods-tp">{{goods.goods_tp}}</view>
+			</view>
+			
 			<view class="goods-info-box">
 				<!-- 商品价格 -->
 				<view class="goods-price">￥{{goods.goods_price}}</view>
@@ -37,11 +40,17 @@
 			};
 		},
 		methods: {
+			gotoGoodDetail(){
+				uni.navigateTo({
+					url:'/subpkg/goods_detail/goods_detail?good_id=' + this.goods.goods_id + '&cat_id=' + this.goods.cat_two_id
+				})
+			},
 			//radio点击事件
 			radioClickHandler() {
 				//子传父数据，通过emit发射  【被监听的事件名】  与  【数据】
 				this.$emit('radio-change', {
 					goods_id: this.goods.goods_id,
+					goods_tp:this.goods.goods_tp,
 					goods_state: !this.goods.goods_state
 				})
 			},
@@ -49,6 +58,7 @@
 			numChangeHandler(val){
 				this.$emit('num-change', {
 					goods_id: this.goods.goods_id,
+					goods_tp:this.goods.goods_tp,
 					//当传入的不是数值时，可以使用加号用来把字符串转为数字
 					goods_count: +val
 				})
@@ -95,6 +105,12 @@
 				font-size: 13px;
 			}
 
+			.goods-tp{
+				margin-top: 20rpx;
+				font-size: 30rpx;
+				color: #989898; 
+			}
+			
 			.goods-info-box {
 				display: flex;
 				justify-content: space-between;
@@ -102,7 +118,7 @@
 				
 				.goods-price {
 					font-size: 16px;
-					color: #c00000;
+					color: #fb3b60;
 				}
 			}
 

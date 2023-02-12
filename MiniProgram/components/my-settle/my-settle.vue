@@ -2,7 +2,7 @@
 	<view class="settle-container">
 		<!-- 全选区域 -->
 		<label class="radio" @click="changeAllState">
-			<radio color="#ff2266" :checked="isFullCheck" style="zoom: 80%;"/><text>全选</text>
+			<radio color="#ff2266" :checked="isFullCheck" style="zoom: 80%;" /><text>全选</text>
 		</label>
 
 		<!-- 合计区域 -->
@@ -11,33 +11,55 @@
 		</view>
 
 		<!-- 结算按钮 -->
-		<view class="btn-settle">结算({{checkedCount}})</view>
+		<view class="btn-settle" @click="settlement">结算({{checkedCount}})</view>
 	</view>
 </template>
 
 <script>
-	import {mapGetters,mapMutations} from 'vuex'
-	
+	import {
+		mapState,
+		mapGetters,
+		mapMutations
+	} from 'vuex'
+
+
 	export default {
 		name: "my-settle",
 		data() {
-			return {
-				
+			return { 
 			};
 		},
-		computed:{
-			...mapGetters('m_cart',['checkedCount','total','checkedGoodsAmount']),
-			isFullCheck(){
+		computed: {
+			...mapGetters('m_cart', ['checkedCount', 'total', 'checkedGoodsAmount', 'allCheckedGoods']),
+			
+			// token 是用户登录成功之后的 token 字符串
+			...mapState('m_user', ['token']),
+			
+			isFullCheck() {
 				return this.total === this.checkedCount
 			}
 		},
-		methods:{
-			...mapMutations('m_cart',['updateAllGoodsState']),
-			changeAllState(){
+		methods: {
+			...mapMutations('m_cart', ['updateAllGoodsState']),
+			changeAllState() {
 				// console.log(!this.isFullCheck)
 				this.updateAllGoodsState(!this.isFullCheck)
+			},
+			//结算按钮
+			settlement() {
+				//判断是否勾选了要结算的商品
+				if (!this.checkedCount) return uni.$showMsg('请选择要结算的商品！')
+				//判断是否登录
+				if (!this.token) return uni.$showMsg('请先登录')
+
+				// console.log(this.allCheckedGoods)
+				uni.navigateTo({
+					url: '/subpkg/orderpay/orderpay?goods=' + encodeURIComponent(JSON.stringify(this
+						.allCheckedGoods)) + '&total=' + this.checkedGoodsAmount +'&isDelete=1'
+				})
 			}
-		}
+		},
+
 	}
 </script>
 

@@ -96,10 +96,22 @@
 		methods: {
 			// 清空搜索历史记录
 			cleanHistory() {
-				// 清空 data 中保存的搜索历史
-				this.historyList = []
-				// 清空本地存储中记录的搜索历史
-				uni.setStorageSync('kw', '[]')
+				uni.showModal({
+					title: '提示',
+					content: '是否清空搜索历史',
+					success: (res) => {
+						if (res.confirm) {
+							console.log('用户点击确定');
+							// 清空 data 中保存的搜索历史
+							this.historyList = []
+							// 清空本地存储中记录的搜索历史
+							uni.setStorageSync('kw', '[]')
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				});
+
 			},
 			input(e) {
 				this.goodsList = []
@@ -132,7 +144,7 @@
 				this.searchResults = []
 			},
 			goBack() {
-				
+
 				uni.navigateBack({
 					delta: 1
 				});
@@ -230,7 +242,7 @@
 				padding: 0 5px;
 
 				.history-title {
-					width:300px;
+					width: 300px;
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
@@ -240,14 +252,15 @@
 				}
 
 				.history-list {
+					margin-top: 15rpx;
 					display: flex;
 					flex-wrap: wrap;
-					height:65px;
+					height: 65px;
 
 					.uni-tag {
 						margin-top: 50px;
 						margin-right: 5px;
-					
+
 					}
 				}
 			}

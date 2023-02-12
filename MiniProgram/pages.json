@@ -5,7 +5,8 @@
 			"path": "pages/home/home", 
 			"style": {
 				"navigationBarTitleText": "Nico商城主页",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance": 150
 			}
 
 		}, {
@@ -19,28 +20,19 @@
 			"path": "pages/cart/cart",
 			"style": {
 				// "navigationBarTitleText": "购物车",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"enablePullDownRefresh": true,
+				"navigationStyle": "custom",
+				"onReachBottomDistance": 150
 			}
 
 		}, {
 			"path": "pages/my/my",
 			"style": {
 				"navigationBarTitleText": "我的主页",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": true
 			}
 
 		}
-
-	    ,{
-            "path" : "pages/orderpay/orderpay",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "订单结算",
-                "enablePullDownRefresh": false
-            }
-            
-        }
     ],
 	"subPackages": [{
 		// 其他子界面
@@ -58,7 +50,7 @@
                     "path" : "goods_list/goods_list",
                     "style" :                                                                                    
                 {
-                    "navigationBarTitleText": "",
+                    "navigationBarTitleText": "商品列表",
                     "enablePullDownRefresh": false,
 					"onReachBottomDistance": 150
                 }
@@ -87,7 +79,8 @@
                     "style" :                                                                                    
                 {
                     "navigationBarTitleText": "选择地址",
-                    "enablePullDownRefresh": false
+                    "enablePullDownRefresh": true,
+					"backgroundColor": "#F8F8F8"
                 }
                 
                 }
@@ -105,6 +98,35 @@
                     "style" :                                                                                    
                 {
                     "navigationBarTitleText": "我的订单",
+                    "enablePullDownRefresh": true,
+					"backgroundColor": "#Ffffff"
+                }
+                
+                }
+                ,{
+                    "path" : "orderpay/orderpay",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "订单结算",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "pay_result/pay_result",
+                    "style" :                                                                                    
+                {
+                    // "navigationBarTitleText": "付款结果",
+                    "enablePullDownRefresh": false,
+					"navigationStyle": "custom"
+                }
+                
+                }
+                ,{
+                    "path" : "order_detail/order_detail",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "订单详情",
                     "enablePullDownRefresh": false
                 }
                 

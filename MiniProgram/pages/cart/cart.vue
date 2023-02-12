@@ -1,7 +1,8 @@
 <template>
 	<view class="cart-container">
 		<view class="cart-bar">
-			<image src="http://localhost:8080/upload/cart/title.png" mode="widthFix"></image>
+			<!-- <image src="http://localhost:8080/upload/cart/title.png" mode="widthFix"></image> -->
+			<image src="~@/static/my-icons/cart-title.png" mode="widthFix"></image>
 		</view>
 
 		<view class="cart-title">
@@ -40,20 +41,9 @@
 		</view>
 
 		<!-- 为你推荐 -->
-		<view class="cart-suggest" style="width: 100%; height: 800px; background-color: pink; margin-top: 30px;">
-			<text>为你推荐</text>
-
-		</view>
-
-		<image src="http://localhost:8080/upload/%E5%88%B7%E6%96%B0.png" mode="widthFix" class="footer"></image>
-
-
-
-		<!-- 结算 -->
-		<!-- <view class="cart-pay" @click="gotoOrderPay" >
-		结算
-		</view> -->
-
+		<my-suggest></my-suggest>
+ 
+		<!-- 订单结算组件 -->
 		<my-settle></my-settle>
 
 
@@ -83,6 +73,12 @@
 				}]
 			};
 		},
+		// 触底的事件
+		onReachBottom() {
+			// 重新获取列表数据
+			uni.$emit("getRandom")
+			// console.log("获取随机数据")
+		},
 		methods: {
 			//去逛逛
 			gotoHome() {
@@ -92,6 +88,7 @@
 			},
 			//修改选中状态
 			radioChangeHandler(e) {
+				// console.log(e)
 				this.updateGoodsState(e)
 			},
 			...mapMutations('m_cart', ['updateGoodsState', 'updateGoodsCount', 'removeGoodsById']),
@@ -103,17 +100,7 @@
 			//删除商品
 			swiperItemClickHandler(goods) {
 				// console.log(goods)
-				this.removeGoodsById(goods.goods_id)
-			},
-			//转到订单结算界面
-			gotoOrderPay() {
-				// console.log(this.cart)
-				//此处对this.cart数组做过滤，过滤出未选中的商品
-				const goods = this.cart.filter(x => x.goods_state == true)
-				// console.log(goods)
-				uni.navigateTo({
-					url: '/pages/orderpay/orderpay?goods=' + encodeURIComponent(JSON.stringify(goods))
-				})
+				this.removeGoodsById(goods)
 			}
 
 		}
@@ -123,12 +110,13 @@
 <style lang="scss">
 	.cart-container {
 		// position: relative;
-		padding-bottom: 45px;
+		padding-bottom: 100rpx;
 
 		.cart-bar {
 			position: fixed;
+			border-top: 50rpx solid #ff6781;
+			// box-sizing: border-box;
 			top: 0px;
-			padding: 10px 0 0 0;
 			background-color: #f7f7f7;
 			z-index: 999;
 		}
@@ -140,7 +128,7 @@
 			margin-top: 62px;
 			padding-left: 5px;
 			border-bottom: 1px solid #efefef;
-			border-top: 1px solid #ff5e62;
+			// border-top: 1px solid #ff5e62;
 			background-color: #ffffff;
 
 			.cart-title-text {
@@ -158,11 +146,7 @@
 			}
 		}
 
-		.footer {
-			position: relative;
-			left: -1px;
-		}
-
+		
 		.cart-suggest {}
 
 	}

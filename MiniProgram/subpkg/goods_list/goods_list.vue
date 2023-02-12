@@ -68,7 +68,7 @@
 		onLoad(options) {
 
 			const myData = JSON.parse(decodeURIComponent(options.data))
-			console.log(myData)
+			// console.log(myData)
 			uni.setNavigationBarTitle({
 				title: myData.cat_name
 			});

@@ -5,8 +5,8 @@
 			<view class="top-box">
 				<!-- 个人昵称pet_name加个人id user_id -->
 				<view class="name-id">
-					<text>昵称：枫叶</text>
-					<text>ID：14183970</text>
+					<text>昵称：{{userinfo.petName}}</text>
+					<text>ID：{{userinfo.userId}}</text>
 				</view>
 				<!-- 头像-->
 				<image src="" class="avatar"></image>
@@ -22,33 +22,36 @@
 				<view class="panel-body">
 					<!-- panel 的 item 项 -->
 					<view class="panel-item">
-						<text>8</text>
-						<text>收藏的店铺</text>
+						<text>0</text>
+						<text>收藏</text>
 					</view>
-					<view class="panel-item">
-						<text>14</text>
+					<view class="" style="font-size: 60rpx;color: gray;margin-top: 20rpx;">
+						|
+					</view>
+					<!-- <view class="panel-item">
+						<text>0</text>
 						<text>收藏的商品</text>
 					</view>
 					<view class="panel-item">
-						<text>18</text>
+						<text>0</text>
 						<text>关注的商品</text>
-					</view>
+					</view> -->
 					<view class="panel-item">
-						<text>84</text>
+						<text>0</text>
 						<text>足迹</text>
 					</view>
 				</view>
 			</view>
 
 			<!-- 第二个面板 -->
-			<view class="panel" >
+			<view class="panel">
 				<!-- 面板的标题 -->
 				<view class="panel-title" data-index="0" @click="gotoMyOrder">
 					<text>全部订单</text>
 					<uni-icons type="arrowright" size="15"></uni-icons>
 				</view>
 				<!-- 面板的主体 -->
-				<view class="panel-body" >
+				<view class="panel-body">
 					<!-- 面板主体中的 item 项 -->
 					<view class="panel-item" data-index="1" @click="gotoMyOrder">
 						<image src="/static/my-icons/icon1.png" class="icon"></image>
@@ -72,7 +75,7 @@
 
 			<view class="panel">
 				<view class="panel-list-item" @click="gotoAddressInfo">
-					<view class="" >
+					<view class="">
 						<uni-icons type="location" size="18" color="deeppink"></uni-icons>
 						<text style="margin-left: 5px;">收货地址</text>
 					</view>
@@ -86,8 +89,8 @@
 					</view>
 					<uni-icons type="arrowright" size="15"></uni-icons>
 				</view>
-				<view class="panel-list-item">
-					<view class="">
+				<view class="panel-list-item" @click="loginout">
+					<view class="" >
 						<uni-icons type="minus" size="18" color="#ffd7bc"></uni-icons>
 						<text style="margin-left: 5px;">退出登录</text>
 					</view>
@@ -101,26 +104,50 @@
 </template>
 
 <script>
+	// 按需导入 mapState 辅助函数
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
+
 	export default {
 		name: "my-userinfo",
 		data() {
 			return {
-				clickItem:'',
+				clickItem: '',
 			};
 		},
-		methods:{
+		computed: {
+			...mapState('m_user',['userinfo'])
+		},
+		methods: {
+			...mapMutations('m_user',['updateToken']),
 			//转到我的订单
-			gotoMyOrder(e){
+			gotoMyOrder(e) {
 				// console.log(e.currentTarget.dataset.index)
 				uni.navigateTo({
-					url:'/subpkg/my_order/my_order?index=' + e.currentTarget.dataset.index
+					url: '/subpkg/my_order/my_order?index=' + e.currentTarget.dataset.index
 				})
 			},
 			//转到选择地址界面
-			gotoAddressInfo(){
+			gotoAddressInfo() {
 				uni.navigateTo({
-					url:'/subpkg/address_info/address_info'
+					url: '/subpkg/address_info/address_info'
 				})
+			},
+			loginout() {
+				uni.showModal({
+					title: '提示',
+					content: '是否退出登录',
+					success: (res) => {
+						if (res.confirm) {
+							console.log('用户点击确定');
+							this.updateToken('')
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				});
 			}
 		}
 	}
@@ -135,7 +162,7 @@
 
 			.top-box {
 				height: 300rpx;
-				background: linear-gradient(to right, #ff2364, #ff2266);
+				background: linear-gradient(to right, #ff2266, #e14336);
 				padding: 0 20px;
 				display: flex;
 				// flex-direction: column;

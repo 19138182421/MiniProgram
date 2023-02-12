@@ -12,7 +12,7 @@
 			</scroll-view>
 			<!-- 右侧的滚动视图区域 -->
 			<scroll-view class="right-scroll-view" scroll-y :style="{height: wh + 'px'}">
-				<view class="" style="position: relative; top: -10px;">
+				<view class="" style="position: relative; top: -10px;" @click="gotonavGoods">
 					<image style="width: 100%; height: 100px; margin-top: 10px;" :src="cateList[active].cat_imgsrc">
 					</image>
 				</view>
@@ -45,7 +45,9 @@
 				cateLevel2: [],
 				// 当前选中项的索引，默认让第一项被选中
 				active: 0,
-				bgcolor:'#ffffff'
+				bgcolor:'#ffffff',
+				colorArr:['#f7eccb','#ead9c9','#f4edff','#fceafe','#fdeae4','#e5effe','#fff0f0','#ffeacd','#faebb5','#ffcebf'],
+				colorBar:['#ffc023','#fe9a4a','#a66af9','#d78ce0','#ff8259','#7dafff','#ff8fad','#fbc070','#ebd99c','#f87f5a']
 			};
 		},
 		onLoad() {
@@ -57,6 +59,11 @@
 			this.getCateList()
 		},
 		methods: {
+			gotonavGoods(){
+				uni.navigateTo({
+					url: `/subpkg/navgoodslist/navgoodslist?color=${this.colorArr[this.active]}&colorBar=${this.colorBar[this.active]}&data=${encodeURIComponent(JSON.stringify(this.cateList[this.active]))}`
+				})
+			},
 			async getCateList() {
 
 				const {
