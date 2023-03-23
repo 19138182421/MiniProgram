@@ -16,7 +16,7 @@
 		<view class="cart-content">
 			<!-- 无数据时显示图片 -->
 			<view class="" v-if="cart.length === 0">
-				<image src="http://localhost:8080/upload/cart/kong.png" mode="widthFix"></image>
+				<image src="http://8.130.64.111:8800/upload/cart/kong.png" mode="widthFix"></image>
 				<view class=""
 					style="border:1px solid red;color: red;margin: auto;width: 50px;padding: 10px 30px;border-radius: 20px;"
 					@click="gotoHome">

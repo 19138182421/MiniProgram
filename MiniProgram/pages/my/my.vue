@@ -21,7 +21,6 @@
 			};
 		},
 		onLoad() {
-
 		},
 		computed: {
 			// token 是用户登录成功之后的 token 字符串

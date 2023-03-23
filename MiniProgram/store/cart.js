@@ -18,7 +18,7 @@ export default {
 			}
 			this.commit('m_cart/saveToStorage')
 			console.log(state.cart)
-		},
+		}, 
 		saveToStorage(state){
 			uni.setStorageSync('cart',JSON.stringify(state.cart))
 		},
@@ -66,7 +66,7 @@ export default {
 			
 			this.commit('m_cart/saveToStorage')
 		}
-		
+		 
 	},
 	
 	getters:{

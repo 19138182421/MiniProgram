@@ -80,7 +80,8 @@
 
 		<view class="footer">
 			<view class="">
-				<button type="default" plain="true" @click="deleteConfirm">删除订单</button>
+				<button type="default" v-if="payStatus === '待付款' || payStatus === '交易完成'" plain="true" @click="deleteConfirm">删除订单</button>
+				<button type="default" v-if="payStatus === '待收货'" plain="true" @click="receiveConfirm">确认收货</button>
 			</view>
 			<view class="">
 				<button type="default" plain="true">在线客服</button>
@@ -145,6 +146,20 @@
 					}
 				});
 			},
+			receiveConfirm() {
+				uni.showModal({
+					title: '提示',
+					content: '是否确认收货?',
+					success: (res) => {
+						if (res.confirm) {
+							console.log('用户点击确定');
+							this.receiveOrder()
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				});
+			},
 			async deleteOrder() {
 				// console.log(456)
 				const {
@@ -152,6 +167,21 @@
 				} = await uni.$http.get(`/deleteOrder?order_id=${this.orderDetail.order_id}`)
 				if (res.meta.status !== 200) return uni.$showMsg("删除失败！！")
 				uni.$showMsg("删除完成！！")
+				//返回上层
+				uni.navigateBack({
+					delta: 1
+				});
+			},
+			async receiveOrder() {
+				const {
+					data: res
+				} = await uni.$http.get(`/modifyOrderStatus?orderId=${this.orderDetail.order_id}&payStatus=交易完成`)
+
+				if (res.meta.status !== 200) {
+					return uni.$showMsg("修改失败！")
+				} else {
+					uni.$showMsg("此交易已完成！")
+				}
 				//返回上层
 				uni.navigateBack({
 					delta: 1

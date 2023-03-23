@@ -96,7 +96,7 @@
 		},
 		methods: {
 			orderStatus(orderStatus){
-				if(orderStatus === '待付款' || orderStatus === '交易完成'){
+				if(orderStatus === '待付款' || orderStatus === '交易完成' || orderStatus === '交易关闭'){
 					return true
 				}else{
 					return false

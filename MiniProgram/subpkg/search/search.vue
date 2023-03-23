@@ -72,7 +72,7 @@
 		data() {
 			return {
 				placeholder: "搜索关键词，找到你想要的",
-				bgColor: 'lightgray',
+				bgColor: '#ececec',
 				//延时器的timerId
 				timer: null,
 				//搜索关键词
@@ -260,6 +260,7 @@
 					.uni-tag {
 						margin-top: 50px;
 						margin-right: 5px;
+						background-color: #ff6781;
 
 					}
 				}
@@ -301,6 +302,7 @@
 		}
 
 		.goods-list {
+			width:100%;
 			position: absolute;
 			top: 55px;
 			background-color: #ffffff;

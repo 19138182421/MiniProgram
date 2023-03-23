@@ -1,7 +1,7 @@
 export default {
 	namespaced: true,
 
-	state: () => ({
+	state: () => ({ 
 		// 登录成功之后的 token 字符串
 		token: uni.getStorageSync('token') || '',
 		// 用户的基本信息

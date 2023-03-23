@@ -11,7 +11,7 @@ import {
 //挂载$http到uni全局对象上
 uni.$http = $http
 //配置根路径
-$http.baseUrl = 'http://localhost:8080'
+$http.baseUrl = 'http://8.130.64.111:8800'
 
 //配置拦截器
 // 请求开始之前做一些事情

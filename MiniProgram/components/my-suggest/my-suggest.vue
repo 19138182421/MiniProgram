@@ -40,10 +40,9 @@
 			...mapState('m_user', ['token'])
 		},
 		mounted() {
-			console.log("挂载")
 			//获取商品列表
 			if (this.token === '') {
-				this.getRandom() 
+				this.getRandom()  
 			} else {
 				this.getGoodsList()
 			}

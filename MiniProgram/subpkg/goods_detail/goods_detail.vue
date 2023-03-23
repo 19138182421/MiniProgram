@@ -68,8 +68,8 @@
 
 			<!-- 售后 -->
 			<view class="shouhou">
-				<image src="http://localhost:8080/upload/%E5%94%AE%E5%90%8E.png" mode=""></image>
-				<image src="http://localhost:8080/upload/价格说明.png" mode="aspectFit"></image>
+				<image src="http://8.130.64.111:8800/upload/%E5%94%AE%E5%90%8E.png" mode=""></image>
+				<image src="http://8.130.64.111:8800/upload/价格说明.png" mode="aspectFit"></image>
 			</view>
 			<!-- 商品导航组件 -->
 			<view class="goods_nav" @click.stop="tryshut">
@@ -402,7 +402,10 @@
 				this.activeIndex = index
 				//点击的规格的属性值
 				this.activeTp = item
-			}
+			},
+			scroll(){
+				
+			},
 		},
 		onPageScroll(e) {
 			// 传入scrollTop值并触发所有easy-loadimage组件下的滚动监听事件

@@ -9,7 +9,7 @@
 					<text>ID：{{userinfo.userId}}</text>
 				</view>
 				<!-- 头像-->
-				<image src="" class="avatar"></image>
+				<image src="http://8.130.64.111:8800/images/d2aad0a4-9327-4cd2-a1a7-43438a3e851b.png" class="avatar"></image>
 			</view>
 
 		</view>

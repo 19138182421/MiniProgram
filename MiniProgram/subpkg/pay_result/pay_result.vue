@@ -93,12 +93,12 @@
 			//转到我的订单
 			gotoMyOrder(e) {
 				// console.log(e.currentTarget.dataset.index)
+				this.goBackCart()
 				uni.navigateTo({
 					url: '/subpkg/my_order/my_order?index=' + e.currentTarget.dataset.index
 				})
 			},
 			goBackCart() {
-				console.log(123)
 				uni.navigateBack({
 					delta: 2,
 					animationType: 'pop-out',

@@ -34,9 +34,9 @@
 				//小程序不通过微信验证，无法获取到用户信息！！！
 				//用自定义的信息来模拟
 				this.userInfo = {
-					userName: "端木",
-					petName: 'Cokkie',
-					userPhone: '13903939419'
+					userName: "杨亚威",
+					petName: '那年夏天',
+					userPhone: '19138182421'
 				}
 
 				//存入用户信息

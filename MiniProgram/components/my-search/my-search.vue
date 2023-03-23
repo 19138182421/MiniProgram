@@ -15,7 +15,7 @@
 			// 背景颜色
 			bgcolor: {
 				type: String,
-				default: 'lightgray'
+				default: '#ececec'
 			},
 			// 圆角尺寸
 			radius: {
@@ -50,7 +50,7 @@
 
 	.my-search-box {
 		height: 36px;
-		background-color: lightgray;
+		background-color: #ececec;
 		// border-radius: 15px;
 		width: 100%;
 		display: flex;
